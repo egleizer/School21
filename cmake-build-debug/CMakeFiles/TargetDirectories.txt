@@ -1,0 +1,3 @@
+/Users/phassan/All_projects/Circle_1/libft/cmake-build-debug/CMakeFiles/rebuild_cache.dir
+/Users/phassan/All_projects/Circle_1/libft/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/phassan/All_projects/Circle_1/libft/cmake-build-debug/CMakeFiles/libft.dir
