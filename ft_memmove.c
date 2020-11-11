@@ -6,7 +6,7 @@
 /*   By: eugeniagleizer <marvin@42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/11/06 16:21:00 by eugeniagl         #+#    #+#             */
-/*   Updated: 2020/11/06 16:21:13 by eugeniagl        ###   ########.fr       */
+/*   Updated: 2020/11/11 09:33:08 by eugeniagl        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	*ft_memmove(void *dst, const void *src, size_t len)
 
 	dest = (unsigned char *)dst;
 	source = (unsigned char *)src;
+	if (dst == 0 && src == 0)
+		return (dst);
 	if (dest < source)
 		while (len--)
 			*dest++ = *source++;

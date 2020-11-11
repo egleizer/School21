@@ -20,9 +20,7 @@ static	int		num_len(int n)
 	if (n == 0)
 		return (1);
 	if (n < 0)
-	{
 		n = -1 * n;
-	}
 	while (n != 0)
 	{
 		n = n / 10;
@@ -37,11 +35,14 @@ static	void	fill_in(int n, char *p, int len)
 		return ;
 	if (n < 0)
 	{
-		*p++ = '-';
+		*p = '-';
 		n = (-1) * n;
+		fill_in(n, p + 1, len - 1);
+		return ;
 	}
 	fill_in(n / 10, p, len - 1);
 	p[len - 1] = (n - (n / 10) * 10) + '0';
+	p[len] = 0;
 }
 
 char			*ft_itoa(int n)
@@ -51,7 +52,8 @@ char			*ft_itoa(int n)
 
 	if (n == -2147483648LL)
 	{
-		pointer = (char *)malloc(sizeof(char) * 12);
+		if (!(pointer = (char *)malloc(sizeof(char) * 14)))
+			return (0);
 		pointer[0] = '-';
 		pointer[1] = '2';
 		n = 147483648;
@@ -59,7 +61,10 @@ char			*ft_itoa(int n)
 		return (pointer);
 	}
 	len = num_len(n);
-	pointer = (char *)malloc(sizeof(char) * len + 1);
+	if (n < 0)
+		len++;
+	if (!(pointer = (char *)malloc(sizeof(char) * (len + 1))))
+		return (0);
 	fill_in(n, pointer, len);
 	return (pointer);
 }
