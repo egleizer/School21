@@ -34,10 +34,10 @@ char		*ft_strtrim(char const *s1, char const *set)
 	new_len = 0;
 	extra_len = 0;
 	index = 0;
-	while (in_set(s1[extra_len], set))
+	while (s1[extra_len] && in_set(s1[extra_len], set))
 		extra_len++;
 	new_len = ft_strlen(s1) - 1;
-	while (in_set(s1[new_len], set))
+	while (new_len >= 0 && in_set(s1[new_len], set))
 		new_len--;
 	new_len = new_len + 1 - extra_len;
 	if (new_len <= 0)
