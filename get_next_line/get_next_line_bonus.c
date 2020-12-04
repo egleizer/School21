@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 int					no_return(char *line)
 {
@@ -31,28 +31,28 @@ int					no_return(char *line)
 int					get_next_line(int fd, char **line)
 {
 	char			*buffer;
-	static char		*whole_line;
+	static char		*whole_line[10000];
 	int				z;
 
 	z = BUFFER_SIZE;
 	if (fd < 0 || z <= 0 || !line || !(buffer = malloc(BUFFER_SIZE + 1)))
 		return (-1);
-	while (!no_return(whole_line) && z != 0)
+	while (!no_return(whole_line[fd]) && z != 0)
 	{
 		if ((z = read(fd, buffer, BUFFER_SIZE)) == -1)
 			return (-1);
-		if ((whole_line = ft_strjoin(whole_line, buffer, z)) == 0)
+		if ((whole_line[fd] = ft_strjoin(whole_line[fd], buffer, z)) == 0)
 			return (-1);
 	}
 	free(buffer);
-	*line = retrieve_line(whole_line);
+	*line = retrieve_line(whole_line[fd]);
 	if (z == 0)
 	{
-		free(whole_line);
-		whole_line = 0;
+		free(whole_line[fd]);
+		whole_line[fd] = 0;
 		return (0);
 	}
-	if ((whole_line = retrieve_remains(whole_line)) == 0)
+	if ((whole_line[fd] = retrieve_remains(whole_line[fd])) == 0)
 		return (-1);
 	return (1);
 }
